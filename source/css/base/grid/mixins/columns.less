@@ -1,0 +1,58 @@
+@import "helpers";
+
+//==========
+// Columns
+//==========
+
+//basic column
+.column(){
+	.flex(1 1 0px);
+}
+
+// @breakpoint: below the chosen breakpoint all columns will become 100% width as we remove flex
+// @isVertical: if vertical is true we change the direction to flex-direction column, used in columns normally
+.column-container(@breakpoint: @def-column-container-breakpoint, @isvertical: false) when (@breakpoint = none){
+	width: 100%;
+	.flexbox();
+	#grid-helpers.getIsVertical(@isvertical);
+}
+
+.column-container(@breakpoint: @def-column-container-breakpoint, @isvertical: false) when (default()){
+	width: 100%;
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	@media (min-width: @breakpointValue){
+		.flexbox();
+		#grid-helpers.getIsVertical(@isvertical);
+	}
+}
+
+// manually set the column size, the size will be affected if flex-wrap is set or not. Grid mixin sets flex-wrap
+// if flex wrap is not set it will shrink or stretch based on avalible space
+// @columnSize: the column size calculated from the max columns, example half is 6, (6/12)
+// @breakpoint: breakpoint at which this size is applied, using min width
+// @marginGutterSize: used to calculate the width, need to negate the margin gutter from the width for it to fit
+.column-size(@columnSize: @max-columns, @breakpoint: @def-column-size-breakpoint, @marginGutterSize: @column-gutter) when (@breakpoint = none){
+	#grid-helpers.getColumnSize(@columnSize, @marginGutterSize);
+}
+
+.column-size(@columnSize: @max-columns, @breakpoint: @def-column-size-breakpoint, @marginGutterSize: @column-gutter) when (default()){
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	@media (min-width: @breakpointValue){
+		#grid-helpers.getColumnSize(@columnSize, @marginGutterSize);
+	}
+}
+
+//no gutter for bug in php compiler not allowing 0 to be passed as a param
+.column-size--nogutter(@columnSize: @max-columns, @breakpoint: @def-column-size-breakpoint) when (@breakpoint = none){
+	#grid-helpers.getColumnSize--nogutter(@columnSize);
+}
+
+.column-size--nogutter(@columnSize: @max-columns, @breakpoint: @def-column-size-breakpoint) when (default()){
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	@media (min-width: @breakpointValue){
+		#grid-helpers.getColumnSize--nogutter(@columnSize);
+	}
+}

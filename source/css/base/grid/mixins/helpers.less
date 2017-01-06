@@ -1,0 +1,70 @@
+//==========
+// helpers
+//==========
+#grid-helpers{
+	.getIsVertical(@isvertical) when (@isvertical = true){
+		.flex-direction(column);
+	}
+
+	.getColumnSize(@columnSize, @marginGutterSize) when (@marginGutterSize > 0){
+		@calcColumnSize: percentage(@columnSize / @max-columns);
+		.flex-basis(calc(@calcColumnSize ~" -" @marginGutterSize));
+	}
+
+	.getColumnSize(@columnSize, @marginGutterSize) when (default()){
+		@calcColumnSize: percentage(@columnSize / @max-columns);
+		.flex-basis(@calcColumnSize);
+	}
+
+	//no gutter for bug in php compiler not allowing 0 to be passed as a param
+	.getColumnSize--nogutter(@columnSize){
+		@calcColumnSize: percentage(@columnSize / @max-columns);
+		.flex-basis(@calcColumnSize);
+	}
+
+	//min breakpoint map
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = xs){
+		@breakpointValue: @xs-min;
+	}
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = sm){
+		@breakpointValue: @sm-min;
+	}
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = md){
+		@breakpointValue: @md-min;
+	}
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = lg){
+		@breakpointValue: @lg-min;
+	}
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = xl){
+		@breakpointValue: @xl-min;
+	}
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = xxl){
+		@breakpointValue: @xxl-min;
+	}
+	.getMinBreakpoint(@breakpoint) when (@breakpoint = xxxl){
+		@breakpointValue: @xxxl-min;
+	}
+
+	//max breakpoint map
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = xxs){
+		@breakpointValue: @xxs-max;
+	}
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = xs){
+		@breakpointValue: @xs-max;
+	}
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = sm){
+		@breakpointValue: @sm-max;
+	}
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = md){
+		@breakpointValue: @md-max;
+	}
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = lg){
+		@breakpointValue: @lg-max;
+	}
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = xl){
+		@breakpointValue: @xl-max;
+	}
+	.getMaxBreakpoint(@breakpoint) when (@breakpoint = xxl){
+		@breakpointValue: @xxl-max;
+	}
+}

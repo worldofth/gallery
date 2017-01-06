@@ -1,0 +1,134 @@
+//====================
+// Typography Mixins
+//====================
+
+//manually set line-height allowing for same line-height accross site
+.line-height(){
+	line-height: 1.4;
+
+	@media (min-width: @sm-min){
+		line-height: @p-line-height;
+	}
+}
+
+//default
+// .line-height(){
+// 	line-height: @p-line-height;
+// }
+
+// changed based on website type, used to apply same font-size accross site
+// @tag, choose tag to get font-size for
+// @breakpoint, choose the breakpoint at which you calculate with
+// @unit, allows change of unit, mostly used for body as it need to be an em
+// the reason for em on body is to get past chrome bug when setting base fontsize t 10px
+.font-size(@tag: p, @breakpoint: md, @unit: @base-unit){
+	#fontHelpers.getBreakpoint(@breakpoint);
+	#fontHelpers.getTagFontSize(@tag, @unit, @scale, @font-size-in);
+
+	font-size: @font-size;
+}
+
+// outputs all breakpoint sizes for a single tag
+// @tag, choose tag to get font-size for
+// @unit, allows change of unit, mostly used for body as it need to be an em
+.font-size-responsive(@tag: p, @unit: @base-unit) when (@tag = p){
+	.font-size(@tag, none, @unit);
+
+	@media (min-width: @sm-min){
+		.font-size(@tag, sm, @unit);
+	}
+
+	@media (min-width: @lg-min){
+		.font-size(@tag, lg, @unit);
+	}
+}
+
+.font-size-responsive(@tag: p, @unit: @base-unit) when (default()){
+	.font-size(@tag, none, @unit);
+
+	@media (min-width: @sm-min){
+		.font-size(@tag, sm, @unit);
+	}
+
+	@media (min-width: @md-min){
+		.font-size(@tag, md, @unit);
+	}
+
+	// @media (min-width: @lg-min){
+	// 	.font-size(@tag, lg, @unit);
+	// }
+}
+
+// default
+// set to base size if no responsive typography is needed
+// .font-size-responsive(@tag: p, @unit: @base-unit){
+// 	.font-size(@tag, none, @unit);
+// }
+
+//fontsize helpers
+/* stylelint-disable */
+#fontHelpers{
+	.getBreakpoint(@breakpoint) when (@breakpoint = none){
+		@breakpointValue: @xs-min;
+		@font-size-in: @base-font-size;
+		@scale: @base-scale;
+	}
+	.getBreakpoint(@breakpoint) when (@breakpoint = xs){
+		@breakpointValue: @sm-min;
+		@font-size-in: @xs-font-size;
+		@scale: @xs-scale;
+	}
+	.getBreakpoint(@breakpoint) when (@breakpoint = sm){
+		@breakpointValue: @md-min;
+		@font-size-in: @sm-font-size;
+		@scale: @sm-scale;
+	}
+	.getBreakpoint(@breakpoint) when (@breakpoint = md){
+		@breakpointValue: @lg-min;
+		@font-size-in: @md-font-size;
+		@scale: @md-scale;
+	}
+	.getBreakpoint(@breakpoint) when (@breakpoint = lg){
+		@breakpointValue: @xl-min;
+		@font-size-in: @lg-font-size;
+		@scale: @lg-scale;
+	}
+
+	.getPFontSize(@unit: @base-unit, @size: @base-font-size){
+		.getTagFontSize(p, @unit, @base-scale, @size);
+	}
+
+	.getTagFontSize(@tag, @unit: @base-unit, @scale-factor: @base-scale, @size: @base-font-size) when (@tag = p), (@tag = h5){
+		.getFontUnit(@size, @unit);
+	}
+
+	.getTagFontSize(@tag, @unit: @base-unit, @scale-factor: @base-scale, @size: @base-font-size) when (@tag = h1){
+		@font-size-h1: round((@size * 10) * pow(@scale-factor, 3)) / 10;
+		.getFontUnit(@font-size-h1, @unit);
+	}
+
+	.getTagFontSize(@tag, @unit: @base-unit, @scale-factor: @base-scale, @size: @base-font-size) when (@tag = h2){
+		@font-size-h2: round((@size * 10) * pow(@scale-factor, 2)) / 10;
+		.getFontUnit(@font-size-h2, @unit);
+	}
+
+	.getTagFontSize(@tag, @unit: @base-unit, @scale-factor: @base-scale, @size: @base-font-size) when (@tag = h3){
+		@font-size-h3: round((@size * 10) * pow(@scale-factor, 1)) / 10;
+		.getFontUnit(@font-size-h3, @unit);
+	}
+
+	.getTagFontSize(@tag, @unit: @base-unit, @scale-factor: @base-scale, @size: @base-font-size) when (@tag = h4){
+		@font-size-h4: round((@size * 10) * pow(@scale-factor, 0.5)) / 10;
+		.getFontUnit(@font-size-h4, @unit);
+	}
+
+	.getTagFontSize(@tag, @unit: @base-unit, @scale-factor: @base-scale, @size: @base-font-size) when (@tag = h6){
+		@font-size-h6: round((@size * 10) * pow(@scale-factor, -1)) / 10;
+		.getFontUnit(@font-size-h6, @unit);
+	}
+
+	.getFontUnit(@var-font-size, @unit: @base-unit){
+		@font-size: unit(@var-font-size, @unit);
+	}
+}
+/* stylelint-enable */

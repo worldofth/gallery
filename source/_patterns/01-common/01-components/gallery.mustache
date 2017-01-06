@@ -1,0 +1,15 @@
+<div class="gallery">
+	<div class="gallery__container js-gallery">
+		{{#gallery}}
+			{{> common-gallery-item}}
+		{{/gallery}}
+	</div>
+	<div class="gallery__preview js-gallery-preview">
+		<button class="gallery__preview-close"><svg><use xlink:href="/images/svgicons.svg#close" /></svg></button>
+		<button class="gallery__preview-btn--previous"><div class="gallery__preview-btn-wrap"><svg><use xlink:href="/images/svgicons.svg#arrow-left" /></svg></div></button>
+		<button class="gallery__preview-btn--next"><div class="gallery__preview-btn-wrap"><svg><use xlink:href="/images/svgicons.svg#arrow-right" /></svg></div></button>
+		<div class="gallery__preview-description"></div>
+		<div class="gallery__preview-description"></div>
+	</div>
+</div>
+

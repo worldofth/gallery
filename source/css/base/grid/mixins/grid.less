@@ -1,0 +1,55 @@
+@import "helpers";
+
+//==========
+// grid
+//==========
+// grid sets the container to wrap, allowing for manual sizing of columns
+
+// @rules: for custom rules used inside a grid, for example grid-column-size can be set here
+// or you can set direct decendants using > * selector and set size using column-size.
+// You can also using this in combination with nth selectors
+// allowing you to have one class control the entire layout or an area
+
+// @breakpoint: at which point we stop doing grid and go to basic flex with no wrap
+// this will remove all forced sizing and everything will go into one column above this breakpoint
+// - breakpoint is max width
+
+.grid(@rules, @breakpoint: @def-grid-breakpoint) when (@breakpoint = none){
+	.flex-wrap(wrap);
+	.align-items(flex-start);
+	.align-content(flex-start);
+
+	@rules();
+}
+
+.grid(@rules, @breakpoint: @def-grid-breakpoint) when (default()){
+	#grid-helpers.getMaxBreakpoint(@breakpoint);
+
+	@media (max-width: @breakpointValue){
+		.flex-wrap(wrap);
+		.align-items(flex-start);
+		.align-content(flex-start);
+
+		@rules();
+	}
+}
+
+// allows you to set common column sizes within a grid at certain breakpoints, applying this to all direct decendants of the grid
+// @columnSize: the column size calculated from the max columns, example half is 6, (6/12)
+// @breakpoint: breakpoint at which this size is applied, using min width
+// @marginGutterSize: used to calculate the width, need to negate the margin gutter from the width for it to fit
+.grid-column-size(@columnSize: @max-columns, @breakpoint: @def-column-size-breakpoint, @marginGutterSize: @column-gutter) when (@breakpoint = none){
+	> *{
+		.column-size(@columnSize, none, @marginGutterSize);
+	}
+}
+
+.grid-column-size(@columnSize: @max-columns, @breakpoint: @def-column-size-breakpoint, @marginGutterSize: @column-gutter) when (default()){
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	@media (min-width: @breakpointValue){
+		> *{
+			.column-size(@columnSize, none, @marginGutterSize);
+		}
+	}
+}

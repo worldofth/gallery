@@ -1,0 +1,45 @@
+//==========
+// Grid Prefabs
+//==========
+//basic grid options ready to go
+
+//all columns are quarters, jump to single row on sm-min
+.pf-grid--md-3(){
+	.container();
+	.column-container();
+	.grid({
+	> *{
+	.column();
+	.gutter();
+	}
+	.grid-column-size(3, sm);
+	});
+}
+
+//all columns are thirds on md and up, halves on sm and singles on below sm
+.pf-grid--md-4--sm-6(){
+	.container();
+	.column-container();
+	.grid({
+	> *{
+	.column();
+	.gutter();
+	}
+	.grid-column-size(6, sm);
+	.grid-column-size(4, md);
+	});
+}
+
+//all columns are thirds and halves on md and down including mobile
+.pf-grid--md-4--6(){
+	.container();
+	.column-container(none);
+	.grid({
+	> *{
+	.column();
+	.gutter();
+	}
+	.grid-column-size(6, none);
+	.grid-column-size(4, md);
+	});
+}

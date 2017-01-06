@@ -1,0 +1,17 @@
+//==========
+// gutter
+//==========
+// applies gutters to columns, this can be optional so not used as a standard in column
+
+// @type: can be changed between margin and padding
+// @size: gutter size
+.gutter(@type: margin, @size: @column-gutter-half){
+	@{type}-left: @size;
+	@{type}-right: @size;
+}
+
+//for bug in php compiler not allowing 0 to be passed as a param
+.gutter-reset(@type: margin){
+	@{type}-left: 0;
+	@{type}-right: 0;
+}

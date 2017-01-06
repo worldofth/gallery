@@ -1,0 +1,67 @@
+{
+	"gallery": [
+		{
+			"size": "735x1099",
+			"thumbnail": {
+				"path": "gallery/belgarum1.jpg",
+				"title": "belgarum1"
+			},
+			"galleryContent": false,
+			"imageLink": "gallery/belgarum1.jpg",
+			"title": "belgarum1",
+			"description": "<p>Lorem ipsum dolor sit amet, <a href=\"#link\">consectetur adipisicing elit. Quos vitae fugiat a tempora</a> quod temporibus distinctio, esse recusandae. Repellat blanditiis exercitationem aut porro ipsam perspiciatis inventore ratione error molestias enim.</p>"
+		},
+		{
+			"size": "735x1207",
+			"thumbnail": {
+				"path": "gallery/belarum2.jpg",
+				"title": "belarum2"
+			},
+			"galleryContent": false,
+			"imageLink": "gallery/belarum2.jpg",
+			"title": "belarum2",
+			"description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos vitae fugiat a tempora quod temporibus distinctio, esse recusandae. Repellat blanditiis exercitationem aut porro ipsam perspiciatis inventore ratione error molestias enim.</p>"
+		},
+		{
+			"size": "735x1797",
+			"thumbnail": {
+				"path": "gallery/reade.png",
+				"title": "reade"
+			},
+			"galleryContent": false,
+			"imageLink": "gallery/reade.png",
+			"title": "reade",
+			"description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos vitae fugiat a tempora quod temporibus distinctio, esse recusandae. Repellat blanditiis exercitationem aut porro ipsam perspiciatis inventore ratione error molestias enim.</p>"
+		},
+		{
+			"size": false,
+			"thumbnail": false,
+			"galleryContent": "<h3>Some content here</h3>",
+			"imageLink": false,
+			"title": "",
+			"description": ""
+		},
+		{
+			"size": "735x1797",
+			"thumbnail": {
+				"path": "gallery/reade.png",
+				"title": "reade"
+			},
+			"galleryContent": false,
+			"imageLink": "gallery/reade.png",
+			"title": "reade",
+			"description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos vitae fugiat a tempora quod temporibus distinctio, esse recusandae. Repellat blanditiis exercitationem aut porro ipsam perspiciatis inventore ratione error molestias enim.</p>"
+		},
+		{
+			"size": "735x1797",
+			"thumbnail": {
+				"path": "gallery/walmsley1.jpg",
+				"title": "walmsley1"
+			},
+			"galleryContent": false,
+			"imageLink": "gallery/walmsley1.jpg",
+			"title": "walmsley1",
+			"description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos vitae fugiat a tempora quod temporibus distinctio, esse recusandae. Repellat blanditiis exercitationem aut porro ipsam perspiciatis inventore ratione error molestias enim.</p>"
+		}
+	]
+}

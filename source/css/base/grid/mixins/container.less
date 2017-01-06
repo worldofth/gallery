@@ -1,0 +1,73 @@
+//==========
+// Container
+//==========
+// the container is used to wrap page elements, it now has nothing to do with columns
+
+// @fluid: if fluid is set there is no max page width, we also ditch margin autos and replace it with percentage padding
+// @gutterType: the only option is pullin or nothing, pullin adds larger padding to pull-in the page more
+
+.container(@fluid: none, @gutterType: @def-gutterType) when (@fluid = fluid){
+	width: 100%;
+
+	@media (min-width: @container-gutter-breakpoint){
+		padding-left: @fluid-gutter;
+		padding-right: @fluid-gutter;
+	}
+}
+
+.container(@fluid: none, @gutterType: @def-gutterType) when (@fluid = fluid) and (@gutterType = pullin){
+	width: 100%;
+
+	@media (min-width: @container-gutter-breakpoint){
+		padding-left: @fluid-pull-in-gutter;
+		padding-right: @fluid-pull-in-gutter;
+	}
+}
+
+.container(@fluid: none, @gutterType: @def-gutterType) when (default()){
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: @max-container-width;
+
+	@media (min-width: @container-gutter-breakpoint){
+		padding-left: @gutter;
+		padding-right: @gutter;
+	}
+}
+
+// for manual gutter application
+// @fluid: if fluid is set there is no max page width
+.container--gutter(@fluid: none, @gutterSize) when (@fluid = fluid){
+	width: 100%;
+
+	@media (min-width: @container-gutter-breakpoint){
+		padding-left: @gutterSize;
+		padding-right: @gutterSize;
+	}
+}
+
+.container--gutter(@fluid: none, @gutterSize) when (default()){
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: @max-container-width;
+
+	@media (min-width: @container-gutter-breakpoint){
+		padding-left: @gutterSize;
+		padding-right: @gutterSize;
+	}
+}
+
+// for manual no-gutter application
+// @fluid: if fluid is set there is no max page width
+.container--no-gutter(@fluid: none) when (@fluid = fluid){
+	width: 100%;
+}
+
+.container--no-gutter(@fluid: none) when (default()){
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: @max-container-width;
+}

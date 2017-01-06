@@ -1,0 +1,60 @@
+//== Media queries breakpoints
+
+//xxs
+@xxs-min: 			  28.125em;
+@xxs-max:             34.99em;
+
+// Extra small screen - 560px
+@xs-min:              35em;
+@xs-max:              47.99em;
+
+// Small screen - 768px
+@sm-min:              48em;
+@sm-max:              63.99em;
+
+// Medium screen - 1024px //use to be 992px 62em
+@md-min:              64em;
+@md-max:              74.99em;
+
+// Large screen - 1200px
+@lg-min:              75em;
+@lg-max: 		      84.374em;
+
+// extra large screen - laptop - 1366px
+@xl-min: 			  85.375em;
+@xl-max: 		      109.99em;
+
+// xxl screen - 1920px
+@xxl-min: 			  120em;
+@xxl-max: 			  159em;
+
+// xxxl screen - 2560px
+@xxxl-min: 			  160em;
+
+//== Grid system
+
+// Number of columns in the grid.
+@max-columns:              			12;
+
+// Padding between columns. Gets divided in half for the left and right.
+@column-gutter:         			30px;
+@column-gutter-half:    			(@column-gutter / 2);
+
+//== Container
+//-- Gutters
+@gutter:          					30px;
+@fluid-gutter: 						3.3%;
+@fluid-pull-in-gutter: 				14%;
+
+//-- max width
+@max-container-width:       		1200px;
+
+//-- container gutter breakpoint
+@container-gutter-breakpoint: 		@lg-min;
+
+//defaults
+@def-gutterType: 					margin;
+@def-column-size-breakpoint: 		md;
+@def-column-container-breakpoint: 	sm;
+@def-grid-breakpoint: 				none;
+@def-pf-row-breakpoint: 			@def-column-container-breakpoint;

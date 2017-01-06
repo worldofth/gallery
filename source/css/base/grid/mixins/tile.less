@@ -1,0 +1,102 @@
+@import "helpers";
+
+//==========
+// Tiles
+//==========
+// creates the styles to create a tiled grid, it doesn't wrap but it allows for vertical groupings which
+// change size based on sibling sizes
+// Notes: When using columns with padding type gutter, use tile-container--nogutter or set vertical gutter to 0
+
+// @breakpoint: below the chosen breakpoint all columns will become 100% width as we remove flex
+// @verticalGutter: the vertical gutter is set based on the breakpoint as well
+.tile-container(@breakpoint: @def-column-container-breakpoint, @gutterType: margin, @totalGutterSize: @column-gutter) when (@gutterType = margin){
+	@gutterSize: (@totalGutterSize / 2);
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	.container();
+	.column-container(@breakpoint);
+
+	&--nested{
+		.column-container(@breakpoint);
+	}
+
+	&--vertical{
+		.column-container(@breakpoint, true);
+
+		@media (min-width: @breakpointValue){
+			.column();
+			.gutter(@gutterType, @gutterSize);
+
+			> * + *{
+				margin-top: @totalGutterSize;
+			}
+		}
+	}
+
+	@media (min-width: @breakpointValue){
+		&--vertical &--nested{
+			width: calc(100% ~" +" @totalGutterSize);
+			margin-left: -@gutterSize;
+			margin-right: -@gutterSize;
+		}
+
+		&--vertical > *:not(&--nested){
+			.gutter-reset(@gutterType);
+		}
+	}
+}
+
+.tile-container(@breakpoint: @def-column-container-breakpoint, @gutterType: margin, @totalGutterSize: @column-gutter) when (default()){
+	@gutterSize: (@totalGutterSize / 2);
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	.container();
+	.column-container(@breakpoint);
+
+	&--nested{
+		.column-container(@breakpoint);
+	}
+
+	&--vertical{
+		.column-container(@breakpoint, true);
+
+		@media (min-width: @breakpointValue){
+			.column();
+			.gutter(@gutterType, @gutterSize);
+		}
+	}
+
+	@media (min-width: @breakpointValue){
+		&--vertical &--nested{
+			width: calc(100% ~" +" @totalGutterSize);
+			margin-left: -@gutterSize;
+			margin-right: -@gutterSize;
+		}
+
+		&--vertical > *:not(&--nested){
+			.gutter-reset(@gutterType);
+		}
+	}
+}
+
+//no gutter for bug in php compiler not allowing 0 to be passed as a param
+.tile-container--nogutter(@breakpoint: @def-column-container-breakpoint){
+	@gutterType: padding;
+	#grid-helpers.getMinBreakpoint(@breakpoint);
+
+	.container--gutter(none, (@gutter + @column-gutter-half));
+	.column-container(@breakpoint);
+
+	&--nested{
+		.column-container(@breakpoint);
+	}
+
+	&--vertical{
+		.column-container(@breakpoint, true);
+
+		@media (min-width: @breakpointValue){
+			.column();
+			.gutter-reset(@gutterType);
+		}
+	}
+}

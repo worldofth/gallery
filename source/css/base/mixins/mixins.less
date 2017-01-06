@@ -1,0 +1,156 @@
+/* stylelint-disable media-feature-no-missing-punctuation */
+// Mixins
+// --------------------------------------------------
+
+// typography
+// -------------------------
+
+.responsive-font-size(@responsive, @min, @max){
+	@min-breakpoint: ((unit(@min) * 10) / unit(@responsive) * 100);
+	@max-breakpoint: ((unit(@max) * 10) / unit(@responsive) * 100);
+
+	font-size: @responsive;
+
+	@media (min-width: unit(@max-breakpoint, px)){
+		font-size: unit(@max, rem);
+	}
+
+	@media (max-width: unit(@min-breakpoint, px)){
+		font-size: unit(@min, rem);
+	}
+}
+
+.textLinesHeight(@lines, @font-size: @base-font-size, @lineheight: @line-height){
+	@textLineHeight: @lines * @font-size * @lineheight;
+}
+
+// Utilities
+// -------------------------
+
+.clearfix(){
+	&:before,
+	&:after{
+		content: " "; // 1
+		display: table; // 2
+	}
+
+	&:after{
+		clear: both;
+	}
+}
+
+// Placeholder text
+.placeholder(@color: @input-color-placeholder){
+	&::-moz-placeholder{
+		color: @color;
+		opacity: 1;
+	}
+
+	&:-ms-input-placeholder{
+		color: @color;
+	}
+
+	&::-webkit-input-placeholder{
+		color: @color;
+	}
+}
+/* stylelint-enable */
+
+// Ratio Helpers
+// -------------------------
+
+// can use to replace image height/width for lazy loading
+.ratio(@width, @height){
+	padding-bottom: (@height / @width) * 100%;
+}
+
+.ratio-block(@width, @height){
+	position: relative;
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	.ratio(@width, @height);
+
+	> *{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+}
+
+// Css Locks
+// -------------------------
+.css-lock(@min-size: 1, @max-size: 1.4, @min-width: 1920, @max-width: 2560, @property: font-size, @unit: rem) when (@unit = rem){
+	@{property}: unit(@min-size, @unit);
+
+	@media (min-width: unit(@min-width, px)) {
+		@{property}: calc(unit(@min-size, @unit)~" + ("@max-size - @min-size~" * (("100vw~" - "(unit(@min-width, @unit) / 10)~") / "(@max-width - @min-width) / 10~"))");
+	}
+
+	@media (min-width: unit(@max-width, px)) {
+		@{property}: unit(@max-size, @unit);
+	}
+}
+
+.css-lock(@min-size: 1, @max-size: 1.4, @min-width: 1920, @max-width: 2560, @property: font-size, @unit: rem) when (default()){
+	@{property}: unit(@min-size, @unit);
+
+	@media (min-width: unit(@min-width, px)) {
+		@{property}: calc(unit(@min-size, @unit)~" + ("@max-size - @min-size~" * (("100vw~" - "unit(@min-width, px)~") / "@max-width - @min-width~"))");
+	}
+
+	@media (min-width: unit(@max-width, px)) {
+		@{property}: unit(@max-size, @unit);
+	}
+}
+
+.css-lock--nobase(@min-size: 1, @max-size: 1.4, @min-width: 1920, @max-width: 2560, @property: font-size, @unit: rem) when (@unit = rem){
+	@media (min-width: unit(@min-width, px)) {
+		@{property}: calc(unit(@min-size, @unit)~" + ("@max-size - @min-size~" * (("100vw~" - "(unit(@min-width, @unit) / 10)~") / "(@max-width - @min-width) / 10~"))");
+	}
+
+	@media (min-width: unit(@max-width, px)) {
+		@{property}: unit(@max-size, @unit);
+	}
+}
+
+.css-lock--nobase(@min-size: 1, @max-size: 1.4, @min-width: 1920, @max-width: 2560, @property: font-size, @unit: rem) when (default()){
+	@media (min-width: unit(@min-width, px)) {
+		@{property}: calc(unit(@min-size, @unit)~" + ("@max-size - @min-size~" * (("100vw~" - "unit(@min-width, px)~") / "@max-width - @min-width~"))");
+	}
+
+	@media (min-width: unit(@max-width, px)) {
+		@{property}: unit(@max-size, @unit);
+	}
+}
+
+.css-lock--2props(@min-size: 1, @max-size: 1.4, @min-width: 1920, @max-width: 2560, @property: width, @property2: height, @unit: rem) when (@unit = rem){
+	@{property}: unit(@min-size, @unit);
+	@{property2}: unit(@min-size, @unit);
+
+	@media (min-width: unit(@min-width, px)) {
+		@{property}: calc(unit(@min-size, @unit)~" + ("(@max-size - @min-size) * 10~" * (("100vw~" - "unit(@min-width, px)~") / "@max-width - @min-width~"))");
+		@{property2}: calc(unit(@min-size, @unit)~" + ("(@max-size - @min-size) * 10~" * (("100vw~" - "unit(@min-width, px)~") / "@max-width - @min-width~"))");
+	}
+
+	@media (min-width: unit(@max-width, px)) {
+		@{property}: unit(@max-size, @unit);
+		@{property2}: unit(@max-size, @unit);
+	}
+}
+
+.css-lock--2props(@min-size: 1, @max-size: 1.4, @min-width: 1920, @max-width: 2560, @property: width, @property2: height, @unit: rem) when (default()){
+	@{property}: unit(@min-size, @unit);
+	@{property2}: unit(@min-size, @unit);
+
+	@media (min-width: unit(@min-width, px)) {
+		@{property}: calc(unit(@min-size, @unit)~" + ("@max-size - @min-size~" * (("100vw~" - "unit(@min-width, px)~") / "@max-width - @min-width~"))");
+		@{property2}: calc(unit(@min-size, @unit)~" + ("@max-size - @min-size~" * (("100vw~" - "unit(@min-width, px)~") / "@max-width - @min-width~"))");
+	}
+
+	@media (min-width: unit(@max-width, px)) {
+		@{property}: unit(@max-size, @unit);
+		@{property2}: unit(@max-size, @unit);
+	}
+}

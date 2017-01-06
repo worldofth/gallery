@@ -1,0 +1,20 @@
+<div class="gallery__item"{{#size}} data-size="{{size}}"{{/size}}>
+	{{#imageLink}}<a href="/images/{{imageLink}}" class="gallery__link">{{/imageLink}}
+		{{#thumbnail}}
+			<div class="gallery__image">
+				<img src="/images/{{thumbnail.path}}" alt="{{thumbnail.title}}">
+			</div>
+		{{/thumbnail}}
+		{{#galleryContent}}
+			<div class="gallery__content">
+				{{{galleryContent}}}
+			</div>
+		{{/galleryContent}}
+	{{#imageLink}}
+		<div class="gallery__description">
+			<h2 class="gallery__item-title">{{title}}</h2>
+			{{{description}}}
+		</div>
+	</a>
+	{{/imageLink}}
+</div>

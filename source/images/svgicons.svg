@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg"><symbol id="arrow-left" viewBox="0 0 16 16">
+    <polygon points="11.1,15.7 3.4,8 11.1,0.3 12.6,1.7 6.3,8 12.6,14.3"/>
+</symbol><symbol id="arrow-right" viewBox="0 0 16 16">
+    <polygon points="4.9,15.7 3.4,14.3 9.7,8 3.4,1.7 4.9,0.3 12.6,8"/>
+</symbol><symbol id="close" viewBox="0 0 48 48">
+    <g fill="none" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+        <line x1="38" x2="10" y1="10" y2="38"/>
+        <line x1="38" x2="10" y1="38" y2="10"/>
+    </g>
+</symbol></svg>
