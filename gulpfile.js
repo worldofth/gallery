@@ -280,6 +280,17 @@ function buildLess(){
 		.pipe(gulp.dest(resolvePath(paths().source.css)));
 }
 
+function buildLessProduction(){
+	return gulp.src(resolvePath(paths().source.css)+'/main.less')
+		.pipe(sourcemaps.init())
+		.pipe(less({
+			plugins: [cleancss]
+		}))
+		.on('error', map_error)
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest(resolvePath(paths().source.css)));
+}
+
 function watchLess(){
 	gulp.watch(resolvePath(paths().source.css) + '/**/*.less', gulp.series(buildLess, 'pl-copy:css', reloadCSS))
 	.on('change',  function(path){
@@ -294,7 +305,7 @@ function watchLessHtml(){
 	});
 }
 
-exports['build-less'] = buildLess;
+exports['build-less'] = buildLessProduction;
 exports['watch-less'] = watchLess;
 exports['watch-less-html'] = watchLessHtml;
 
@@ -426,6 +437,19 @@ exports['build-js'] = buildJS;
 exports['build-es6'] = buildES6;
 exports['watch-js'] = watchJS;
 exports['watch-js-html'] = watchJSHTML;
+
+//===============================
+// 		Javascript - Testing
+//===============================
+
+const mocha = require('gulp-mocha');
+
+function testJS(){
+	return gulp.src(resolvePath(paths().source.js)+'/src/**/*.test.js', {read: false})
+		.pipe(mocha({reporter: 'nyan'}));
+}
+
+exports['test-js'] = testJS;
 
 //===============================
 // 		Html - Tasks
